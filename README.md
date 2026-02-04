@@ -1,1 +1,1 @@
-<a href https://chat.deepseek.com/share/gskrwce4co9g85oz4y>deepseek</a>
+https://chat.deepseek.com/share/gskrwce4co9g85oz4y>deepseek
