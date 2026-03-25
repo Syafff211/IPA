@@ -8,7 +8,7 @@ on:
 jobs:
   vps-session:
     runs-on: ubuntu-latest
-    timeout-minutes: 350
+    timeout-minutes: 21600
 
     steps:
       - name: Checkout repo
@@ -16,19 +16,19 @@ jobs:
 
       - name: Display startup info
         run: |
-          echo "Creating hostname root@arvox"
-          echo "Creating username "not" and pass "arvox"
+          echo "Creating hostname root@notfleppy"
+          echo "Creating username "not" and pass "fleppy"
 
       - name: Set hostname
         run: |
-          sudo hostnamectl set-hostname root@arvox
-          echo "127.0.0.1 root@arvox" | sudo tee -a /etc/hosts
+          sudo hostnamectl set-hostname root@notfleppy
+          echo "127.0.0.1 root@notfleppy" | sudo tee -a /etc/hosts
 
       - name: Set root password
         run: |
-          echo "root:arvox" | sudo chpasswd
+          echo "root:fleppy" | sudo chpasswd
 
-      - name: Create user 'not' with password 'arvox'
+      - name: Create user 'not' with password 'fleppy'
         run: |
           if ! id -u not >/dev/null 2>&1; then
             sudo useradd -m -s /bin/bash not
