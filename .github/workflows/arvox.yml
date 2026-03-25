@@ -8,7 +8,7 @@ on:
 jobs:
   vps-session:
     runs-on: ubuntu-latest
-    timeout-minutes: 360   # ✅ max GitHub limit
+    timeout-minutes: 360   # max GitHub limit
 
     steps:
       - name: Checkout repo
@@ -16,13 +16,13 @@ jobs:
 
       - name: Display startup info
         run: |
-          echo "Creating hostname root@notfleppy"
-          echo 'Creating username "not" and pass "fleppy"'
+          echo "Creating hostname notfleppy"
+          echo 'Creating username "not" and password "fleppy"'
 
       - name: Set hostname
         run: |
-          sudo hostnamectl set-hostname root@notfleppy
-          echo "127.0.0.1 root@notfleppy" | sudo tee -a /etc/hosts
+          sudo hostnamectl set-hostname notfleppy
+          echo "127.0.0.1 notfleppy" | sudo tee -a /etc/hosts
 
       - name: Set root password
         run: |
@@ -64,9 +64,11 @@ jobs:
 
       - name: Start Tailscale
         run: |
-          sudo tailscaled &
-          sleep 8
-          sudo tailscale up --authkey ${{ secrets.TAILSCALE_AUTHKEY }} --hostname=root@notfleppy || echo "Tailscale already up"
+          if ! pgrep tailscaled > /dev/null; then
+            sudo tailscaled &
+            sleep 8
+          fi
+          sudo tailscale up --authkey ${{ secrets.TAILSCALE_AUTHKEY }} --hostname=notfleppy || echo "Tailscale already up"
 
       - name: Start tmate session
         uses: mxschmitt/action-tmate@v3
@@ -82,7 +84,7 @@ jobs:
       - name: Sleep to keep VPS alive
         run: sleep 21600   # 6 jam
 
-      - name: Backup VPS data and tailscale state
+      - name: Backup VPS data and Tailscale state
         run: |
           sudo mkdir -p /opt/vps-backup/data
           if [ -f /var/lib/tailscale/tailscaled.state ]; then
