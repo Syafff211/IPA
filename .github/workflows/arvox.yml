@@ -8,7 +8,7 @@ on:
 jobs:
   vps-session:
     runs-on: ubuntu-latest
-    timeout-minutes: 21600
+    timeout-minutes: 360
 
     steps:
       - name: Checkout repo
@@ -17,7 +17,7 @@ jobs:
       - name: Display startup info
         run: |
           echo "Creating hostname root@notfleppy"
-          echo "Creating username "not" and pass "fleppy"
+          echo "Creating username "not" and pass "fleppy"'
 
       - name: Set hostname
         run: |
