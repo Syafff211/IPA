@@ -7,7 +7,7 @@ on:
 
 jobs:
   vps-session:
-    runs-on: 22.04
+    runs-on: ubuntu-latest
     timeout-minutes: 350
 
     steps:
@@ -16,19 +16,19 @@ jobs:
 
       - name: Display startup info
         run: |
-          echo "Creating hostname root@notfleppy"
-          echo "Creating username "not" and pass "fleppy"
+          echo "Creating hostname root@arvox"
+          echo "Creating username "not" and pass "arvox"
 
       - name: Set hostname
         run: |
-          sudo hostnamectl set-hostname root@notfleppy
-          echo "127.0.0.1 root@notfleppy" | sudo tee -a /etc/hosts
+          sudo hostnamectl set-hostname root@arvox
+          echo "127.0.0.1 root@arvox" | sudo tee -a /etc/hosts
 
       - name: Set root password
         run: |
-          echo "root:fleppy" | sudo chpasswd
+          echo "root:arvox" | sudo chpasswd
 
-      - name: Create user 'not' with password 'fleppy'
+      - name: Create user 'not' with password 'arvox'
         run: |
           if ! id -u not >/dev/null 2>&1; then
             sudo useradd -m -s /bin/bash not
